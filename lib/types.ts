@@ -1,0 +1,22 @@
+export type Event = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string | null;
+  timezone: string;
+  locationName: string;
+  address: string | null;
+  googleMapsLink: string | null;
+  capacity: number | null;
+  cost: number | null;
+  difficulty: string;
+  distance: string | null;
+  elevationGain: string | null;
+  packingList: string | null;
+  image: string | null;
+  isPrivate: boolean;
+  accessCode: string | null;
+  published: boolean;
+};
