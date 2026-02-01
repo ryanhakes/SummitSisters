@@ -26,7 +26,7 @@ export default async function EventDetailPage({
             <div className="mt-6 rounded-md bg-green-50 p-4 text-green-800">
               <h3 className="font-semibold">Registration confirmed! 🎉</h3>
               <p className="mt-2 text-sm">
-                Thanks for signing up! We'll send you more details soon. Can't wait to see you out there on the trails! 🌿
+                Thanks for signing up! We&apos;ll send you more details soon. Can&apos;t wait to see you out there on the trails! 🌿
               </p>
             </div>
           )}

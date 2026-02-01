@@ -128,7 +128,7 @@ export default async function HomePage() {
             }
           ].map((testimonial) => (
             <div key={testimonial.name} className="card">
-              <p className="text-sm italic text-pine/80">"{testimonial.quote}"</p>
+              <p className="text-sm italic text-pine/80">&ldquo;{testimonial.quote}&rdquo;</p>
               <p className="mt-4 text-sm font-semibold text-moss">{testimonial.name}</p>
             </div>
           ))}
