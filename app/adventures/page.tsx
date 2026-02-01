@@ -93,7 +93,7 @@ export default function AdventuresPage() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
               <Image
                 src="/images/adventures/adventure-03.jpg"
                 alt="Summit Sisters adventure highlight 1"
@@ -104,7 +104,7 @@ export default function AdventuresPage() {
               />
             </div>
             <div className="grid gap-4">
-              <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
                 <Image
                   src="/images/adventures/adventure-06.jpg"
                   alt="Summit Sisters adventure highlight 2"
@@ -113,7 +113,7 @@ export default function AdventuresPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
                 <Image
                   src="/images/adventures/adventure-08.jpg"
                   alt="Summit Sisters adventure highlight 3"
