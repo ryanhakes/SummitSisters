@@ -16,7 +16,9 @@ export default function ContactPage() {
                 <div className="flex items-start gap-3">
                   <span className="badge">Email</span>
                   <div>
-                    <p className="text-sm font-semibold text-pine">hello@summitsisters.org</p>
+                    <a className="text-sm font-semibold text-pine" href="mailto:julie@summit-sisters.com">
+                      julie@summit-sisters.com
+                    </a>
                     <p className="mt-2 text-xs text-pine/60">Best for scheduling, sponsorships, or general questions.</p>
                   </div>
                 </div>
@@ -25,7 +27,14 @@ export default function ContactPage() {
                 <div className="flex items-start gap-3">
                   <span className="badge">Instagram</span>
                   <div>
-                    <p className="text-sm font-semibold text-pine">@go_summitsisters</p>
+                    <a
+                      className="text-sm font-semibold text-pine"
+                      href="https://instagram.com/go_summitsisters"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      @go_summitsisters
+                    </a>
                     <p className="mt-2 text-xs text-pine/60">Follow the latest adventures and send a quick DM.</p>
                   </div>
                 </div>
