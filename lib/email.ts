@@ -1,9 +1,12 @@
-import { Resend } from "resend";
 import { render } from "@react-email/render";
 import RegistrationConfirmationEmail from "@/emails/registration-confirmation";
 import BroadcastUpdateEmail from "@/emails/broadcast-update";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY) return null;
+  const { Resend } = require("resend") as typeof import("resend");
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function sendRegistrationEmail({
   to,
@@ -24,6 +27,8 @@ export async function sendRegistrationEmail({
     return;
   }
 
+  const resend = getResend();
+  if (!resend) return;
   await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to,
@@ -55,6 +60,8 @@ export async function sendBroadcastEmail({
     return;
   }
 
+  const resend = getResend();
+  if (!resend) return;
   await resend.emails.send({
     from: process.env.EMAIL_FROM,
     to,
@@ -76,6 +83,8 @@ export async function sendContactEmail({
     return;
   }
 
+  const resend = getResend();
+  if (!resend) return;
   await resend.emails.send({
     from: process.env.EMAIL_FROM || "Summit Sisters <hello@summitsisters.org>",
     to: process.env.CONTACT_INBOX,
