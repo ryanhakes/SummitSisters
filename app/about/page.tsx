@@ -7,7 +7,7 @@ export default function AboutPage() {
           <h1 className="mt-4 text-3xl font-bold text-pine">Founded by Julie Hakes in 2022</h1>
           <p className="mt-4 text-sm text-pine/70">
             Julie launched Summit Sisters after seeing how outdoor adventure and faith-centered community can unlock healing.
-            The ministry now serves women across Oregon who want to grow in courage, confidence, and purpose.
+            The ministry now serves women across Michigan who want to grow in courage, confidence, and purpose.
           </p>
           <p className="mt-4 text-sm text-pine/70">
             Our signature healing hikes create safe space for at-risk women to breathe fresh air, connect with God, and walk with

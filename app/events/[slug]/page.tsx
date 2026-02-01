@@ -2,7 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getEventBySlug } from "@/lib/events";
 
-export default async function EventDetailPage({ params }: { params: { slug: string } }) {
+export default async function EventDetailPage({ 
+  params,
+  searchParams
+}: { 
+  params: { slug: string },
+  searchParams?: { success?: string; error?: string }
+}) {
   const event = await getEventBySlug(params.slug);
   if (!event) {
     notFound();
@@ -15,6 +21,28 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
           <Link href="/events" className="text-sm text-sunrise">← Back to events</Link>
           <h1 className="mt-4 text-3xl font-bold text-pine">{event.title}</h1>
           <p className="mt-2 text-sm text-pine/70">{event.locationName}</p>
+
+          {searchParams?.success === "registered" && (
+            <div className="mt-6 rounded-md bg-green-50 p-4 text-green-800">
+              <h3 className="font-semibold">Registration confirmed! 🎉</h3>
+              <p className="mt-2 text-sm">
+                Thanks for signing up! We'll send you more details soon. Can't wait to see you out there on the trails! 🌿
+              </p>
+            </div>
+          )}
+
+          {searchParams?.error && (
+            <div className="mt-6 rounded-md bg-red-50 p-4 text-red-800">
+              <h3 className="font-semibold">Registration failed</h3>
+              <p className="mt-2 text-sm">
+                {searchParams.error === "invalid" && "Please check all required fields and try again."}
+                {searchParams.error === "spam" && "Spam detected. Please try again."}
+                {searchParams.error === "access" && "Invalid access code for this private event."}
+                {searchParams.error === "full" && "This event is at capacity."}
+                {searchParams.error === "server" && "Server error. Please try again later."}
+              </p>
+            </div>
+          )}
           <div className="mt-6 grid gap-4 text-sm text-pine/80 md:grid-cols-2">
             <div className="card">
               <p className="text-xs uppercase text-pine/60">Date + Time</p>
@@ -72,11 +100,11 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
           <form className="mt-6 grid gap-4" action={`/api/events/${event.id}/register`} method="post">
             <input type="hidden" name="eventId" value={event.id} />
             <div className="grid gap-2">
-              <label htmlFor="name">Full name</label>
+              <label htmlFor="name">Full name <span className="text-red-500">*</span></label>
               <input id="name" name="name" required />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email <span className="text-red-500">*</span></label>
               <input id="email" type="email" name="email" required />
             </div>
             <div className="grid gap-2">
@@ -84,11 +112,11 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
               <input id="phone" name="phone" />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="emergencyName">Emergency contact name</label>
+              <label htmlFor="emergencyName">Emergency contact name <span className="text-red-500">*</span></label>
               <input id="emergencyName" name="emergencyName" required />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="emergencyPhone">Emergency contact phone</label>
+              <label htmlFor="emergencyPhone">Emergency contact phone <span className="text-red-500">*</span></label>
               <input id="emergencyPhone" name="emergencyPhone" required />
             </div>
             <div className="grid gap-2">
@@ -96,16 +124,16 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
               <textarea id="medicalNotes" name="medicalNotes" rows={3} />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="howHeard">How did you hear about Summit Sisters?</label>
+              <label htmlFor="howHeard">How did you hear about Summit Sisters? <span className="text-red-500">*</span></label>
               <input id="howHeard" name="howHeard" required />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="whyJoin">Why do you want to come?</label>
+              <label htmlFor="whyJoin">Why do you want to come? <span className="text-red-500">*</span></label>
               <textarea id="whyJoin" name="whyJoin" rows={3} required />
             </div>
             {event.isPrivate && (
               <div className="grid gap-2">
-                <label htmlFor="accessCode">Access code</label>
+                <label htmlFor="accessCode">Access code <span className="text-red-500">*</span></label>
                 <input id="accessCode" name="accessCode" required />
                 <p className="text-xs text-pine/60">This event is invite-only. Enter the code provided by Julie.</p>
               </div>
@@ -113,7 +141,7 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
             <div className="flex items-start gap-3 text-xs text-pine/70">
               <input id="waiver" type="checkbox" name="waiver" required className="mt-1 h-4 w-4" />
               <label htmlFor="waiver">
-                I understand this is an outdoor activity and I accept the waiver and safety guidelines. I agree that healing
+                <span className="text-red-500">*</span> I understand this is an outdoor activity and I accept the waiver and safety guidelines. I agree that healing
                 hikes are not medical advice.
               </label>
             </div>

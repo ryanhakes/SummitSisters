@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma";
 
 export async function getUpcomingEvents(limit?: number) {
   return prisma.event.findMany({
-    where: { published: true, dateStart: { gte: new Date() } },
-    orderBy: { dateStart: "asc" },
+    where: { published: true },
+    orderBy: { dateStart: "desc" },
     take: limit
   });
 }

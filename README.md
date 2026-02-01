@@ -12,7 +12,7 @@ Production-ready MVP for Summit Sisters — an Oregon-based Christian women’s 
 - Next.js (App Router) + TypeScript
 - Tailwind CSS
 - Prisma + Postgres (Neon or Supabase recommended)
-- NextAuth (email magic link)
+- NextAuth (credentials password)
 - Resend (transactional + broadcast email)
 
 ## Local Setup
@@ -43,11 +43,10 @@ See `.env.example` for all required values.
 | DATABASE_URL | Postgres connection string (Neon/Supabase) |
 | NEXTAUTH_URL | Base URL (e.g., http://localhost:3000) |
 | NEXTAUTH_SECRET | Random secret for NextAuth |
-| EMAIL_SERVER | SMTP server URL (Resend SMTP) |
 | EMAIL_FROM | Sender address for emails |
 | RESEND_API_KEY | Resend API key |
 | CONTACT_INBOX | Julie's inbox for contact form |
-| ADMIN_EMAIL | Admin login email |
+| ADMIN_PASSWORD | Password for `/admin` login |
 
 ## Deploy to Vercel + Neon/Supabase
 1. Create a Postgres database in Neon or Supabase.
@@ -55,6 +54,23 @@ See `.env.example` for all required values.
 3. Add the rest of `.env.example` values in Vercel.
 4. Deploy the repo to Vercel.
 5. Run Prisma migrations in Vercel (or locally) using `npx prisma migrate deploy`.
+
+## Launch Checklist (Vercel + Cloudflare)
+1. Create a Neon/Supabase Postgres database and copy the connection string.
+2. In Vercel, create a new project from this repo.
+3. Set Vercel environment variables:
+   - `DATABASE_URL`
+   - `NEXTAUTH_URL` (https://summit-sisters.com)
+   - `NEXTAUTH_SECRET`
+   - `ADMIN_PASSWORD`
+   - `RESEND_API_KEY`
+   - `EMAIL_FROM`
+   - `CONTACT_INBOX`
+4. Deploy once, then run migrations:
+   - `npx prisma migrate deploy`
+5. In Vercel, add the custom domain `summit-sisters.com`.
+6. In Cloudflare DNS, add the records Vercel provides for apex + www.
+7. Verify HTTPS works and set www → apex (or apex → www) redirect in Vercel.
 
 ## Local SQLite Option
 If you prefer SQLite for local development, update `prisma/schema.prisma` to use `provider = "sqlite"` and set
@@ -86,7 +102,7 @@ If you prefer SQLite for local development, update `prisma/schema.prisma` to use
 
 ## Basic Checks
 - Form validation uses Zod for registration, admin event creation, and contact.
-- Admin routes require signed-in email matching `ADMIN_EMAIL`.
+- Admin routes require a successful password login (set by `ADMIN_PASSWORD`).
 
 ## Notes
 - Healing hikes include a "not medical advice" reminder in event details.

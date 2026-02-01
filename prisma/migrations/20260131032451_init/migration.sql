@@ -37,7 +37,7 @@ CREATE TABLE "Registration" (
     "emergencyPhone" TEXT NOT NULL,
     "medicalNotes" TEXT,
     "waiverAcceptedAt" TIMESTAMP(3) NOT NULL,
-    "answers" JSONB NOT NULL,
+    "answers" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Registration_pkey" PRIMARY KEY ("id")
@@ -47,7 +47,7 @@ CREATE TABLE "Registration" (
 CREATE TABLE "AdminUser" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "role" TEXT NOT NULL DEFAULT 'admin',
+    "role" TEXT NOT NULL DEFAULT 'admin'
 
     CONSTRAINT "AdminUser_pkey" PRIMARY KEY ("id")
 );
