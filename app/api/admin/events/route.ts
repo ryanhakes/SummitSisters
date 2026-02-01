@@ -45,7 +45,7 @@ export async function POST(request: Request) {
 
   if (!parsed.success) {
     console.log("Validation errors:", parsed.error.issues);
-    return NextResponse.redirect(new URL("/admin/events/new?error=invalid", request.url));
+    return NextResponse.redirect(new URL("/admin/events/new?error=invalid", request.url), 303);
   }
 
   const data = parsed.data;
@@ -77,5 +77,5 @@ export async function POST(request: Request) {
     data: eventData
   });
 
-  return NextResponse.redirect(new URL(`/admin?success=created`, request.url));
+  return NextResponse.redirect(new URL(`/admin?success=created`, request.url), 303);
 }

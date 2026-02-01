@@ -19,10 +19,10 @@ export async function POST(request: Request, { params }: { params: { id: string 
         where: { id: params.id }
       });
       console.log("Event deleted successfully");
-      return NextResponse.redirect(new URL("/admin?success=deleted", request.url));
+      return NextResponse.redirect(new URL("/admin?success=deleted", request.url), 303);
     } catch (error) {
       console.error("Delete error:", error);
-      return NextResponse.redirect(new URL("/admin?error=delete", request.url));
+      return NextResponse.redirect(new URL("/admin?error=delete", request.url), 303);
     }
   }
 
@@ -41,7 +41,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
   if (!parsed.success) {
     console.log("Validation errors:", parsed.error.issues);
-    return NextResponse.redirect(new URL(`/admin/events/${params.id}/edit?error=invalid`, request.url));
+    return NextResponse.redirect(new URL(`/admin/events/${params.id}/edit?error=invalid`, request.url), 303);
   }
 
   const data = parsed.data;
@@ -71,5 +71,5 @@ export async function POST(request: Request, { params }: { params: { id: string 
     }
   });
 
-  return NextResponse.redirect(new URL(`/admin?success=updated`, request.url));
+  return NextResponse.redirect(new URL(`/admin?success=updated`, request.url), 303);
 }
