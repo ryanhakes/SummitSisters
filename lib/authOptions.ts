@@ -22,8 +22,8 @@ const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX_ATTEMPTS = 8;
 const RATE_LIMIT_BLOCK_MS = 15 * 60 * 1000;
 
-function getClientIp(req?: Request) {
-  if (!req) return "unknown";
+function getClientIp(req?: { headers?: { get?: (name: string) => string | null } }) {
+  if (!req?.headers?.get) return "unknown";
   const forwardedFor = req.headers.get("x-forwarded-for");
   if (forwardedFor) {
     return forwardedFor.split(",")[0]?.trim() || "unknown";
