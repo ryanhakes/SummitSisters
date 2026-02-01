@@ -20,7 +20,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-40 bg-mist/95 backdrop-blur border-b border-sand">
       <div className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-24">
         <Link href="/" className="text-xl font-bold text-pine inline-flex items-center">
-          <Logo className="h-16" />
+          <Logo className="h-20 w-auto" />
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
