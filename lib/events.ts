@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 export async function getUpcomingEvents(limit?: number) {
   return prisma.event.findMany({
     where: { published: true },
-    orderBy: { dateStart: "desc" },
+    orderBy: { dateStart: "asc" },
     take: limit
   });
 }
