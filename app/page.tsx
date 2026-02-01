@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import EventCard from "@/components/EventCard";
 import { getUpcomingEvents } from "@/lib/events";
@@ -8,8 +9,16 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="section bg-[url('https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center text-white">
-        <div className="rounded-3xl bg-pine/80 p-10 backdrop-blur-sm md:max-w-2xl">
+      <section className="section relative overflow-hidden text-white">
+        <Image
+          src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=2000&auto=format&fit=crop"
+          alt="Mountain landscape backdrop"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="relative rounded-3xl bg-pine/80 p-10 backdrop-blur-sm md:max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.3em]">Summit Sisters</p>
           <h1 className="mt-4 text-4xl font-bold md:text-5xl">
             Epic adventures + faith-forward sisterhood for women ready to rise.
