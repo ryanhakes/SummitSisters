@@ -11,14 +11,14 @@ export async function POST(request: Request) {
   });
 
   if (!parsed.success) {
-    return NextResponse.redirect(new URL("/contact?error=invalid", request.url));
+    return NextResponse.redirect(new URL("/contact?error=invalid", request.url), 303);
   }
 
   if (parsed.data.website) {
-    return NextResponse.redirect(new URL("/contact?error=spam", request.url));
+    return NextResponse.redirect(new URL("/contact?error=spam", request.url), 303);
   }
 
   await sendContactEmail(parsed.data);
 
-  return NextResponse.redirect(new URL("/contact?success=sent", request.url));
+  return NextResponse.redirect(new URL("/contact?success=sent", request.url), 303);
 }
