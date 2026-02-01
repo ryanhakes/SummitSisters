@@ -33,7 +33,7 @@ export default function EventForm({
       </div>
       <div className="grid gap-2">
         <label htmlFor="timezone">Timezone</label>
-        <input id="timezone" name="timezone" required defaultValue={event?.timezone ?? "America/Los_Angeles"} />
+        <input id="timezone" name="timezone" required defaultValue={event?.timezone ?? "US/Eastern"} />
       </div>
       <div className="grid gap-2">
         <label htmlFor="locationName">Location name</label>

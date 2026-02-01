@@ -17,6 +17,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
   });
 
   if (!parsed.success) {
+    console.log("Registration validation errors:", parsed.error.issues);
     return NextResponse.redirect(new URL(`${fallbackUrl}?error=invalid`, request.url));
   }
 
@@ -45,31 +46,36 @@ export async function POST(request: Request, { params }: { params: { id: string 
     }
   }
 
-  await prisma.registration.create({
-    data: {
-      eventId: event.id,
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone || null,
-      emergencyName: parsed.data.emergencyName,
-      emergencyPhone: parsed.data.emergencyPhone,
-      medicalNotes: parsed.data.medicalNotes || null,
-      waiverAcceptedAt: new Date(),
-      answers: {
-        howHeard: parsed.data.howHeard,
-        whyJoin: parsed.data.whyJoin
+  try {
+    await prisma.registration.create({
+      data: {
+        eventId: event.id,
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone || null,
+        emergencyName: parsed.data.emergencyName,
+        emergencyPhone: parsed.data.emergencyPhone,
+        medicalNotes: parsed.data.medicalNotes || null,
+        waiverAcceptedAt: new Date(),
+        answers: JSON.stringify({
+          howHeard: parsed.data.howHeard,
+          whyJoin: parsed.data.whyJoin
+        })
       }
-    }
-  });
+    });
 
-  await sendRegistrationEmail({
-    to: parsed.data.email,
-    name: parsed.data.name,
-    eventTitle: event.title,
-    eventDate: event.dateStart.toLocaleString("en-US", { timeZone: event.timezone }),
-    eventLocation: event.locationName,
-    calendarLink: `${new URL(request.url).origin}/api/events/${event.id}/calendar`
-  });
+    await sendRegistrationEmail({
+      to: parsed.data.email,
+      name: parsed.data.name,
+      eventTitle: event.title,
+      eventDate: event.dateStart.toLocaleString("en-US", { timeZone: event.timezone }),
+      eventLocation: event.locationName,
+      calendarLink: `${new URL(request.url).origin}/api/events/${event.id}/calendar`
+    });
+  } catch (error) {
+    console.error("Registration error:", error);
+    return NextResponse.redirect(new URL(`/events/${event.slug}?error=server`, request.url));
+  }
 
   return NextResponse.redirect(new URL(`/events/${event.slug}?success=registered`, request.url));
 }
