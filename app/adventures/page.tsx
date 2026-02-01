@@ -92,38 +92,7 @@ export default function AdventuresPage() {
               </a>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
-              <Image
-                src="/images/adventures/adventure-03.jpg"
-                alt="Summit Sisters adventure highlight 1"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="grid gap-4">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
-                <Image
-                  src="/images/adventures/adventure-06.jpg"
-                  alt="Summit Sisters adventure highlight 2"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
-                <Image
-                  src="/images/adventures/adventure-08.jpg"
-                  alt="Summit Sisters adventure highlight 3"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
+          <div className="hidden lg:block" aria-hidden="true"></div>
         </div>
       </section>
 
