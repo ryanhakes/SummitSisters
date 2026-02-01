@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const gallery = [
@@ -92,26 +93,33 @@ export default function AdventuresPage() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="overflow-hidden rounded-3xl shadow-lg">
-              <img
+            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <Image
                 src="/images/adventures/adventure-03.jpg"
                 alt="Summit Sisters adventure highlight 1"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
               />
             </div>
             <div className="grid gap-4">
-              <div className="overflow-hidden rounded-3xl shadow-lg">
-                <img
+              <div className="relative overflow-hidden rounded-3xl shadow-lg">
+                <Image
                   src="/images/adventures/adventure-06.jpg"
                   alt="Summit Sisters adventure highlight 2"
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
-              <div className="overflow-hidden rounded-3xl shadow-lg">
-                <img
+              <div className="relative overflow-hidden rounded-3xl shadow-lg">
+                <Image
                   src="/images/adventures/adventure-08.jpg"
                   alt="Summit Sisters adventure highlight 3"
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -131,12 +139,16 @@ export default function AdventuresPage() {
         </div>
         <div className="mt-8 grid auto-rows-[180px] gap-4 sm:auto-rows-[200px] md:auto-rows-[220px] lg:grid-cols-3">
           {gallery.map((photo) => (
-            <div key={photo.src} className={`group overflow-hidden rounded-3xl bg-white shadow-lg ${photo.className}`}>
-              <img
+            <div
+              key={photo.src}
+              className={`group relative overflow-hidden rounded-3xl bg-white shadow-lg ${photo.className}`}
+            >
+              <Image
                 src={photo.src}
                 alt={photo.alt}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition duration-500 group-hover:scale-105"
               />
             </div>
           ))}
